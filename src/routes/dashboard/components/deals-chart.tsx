@@ -1,15 +1,11 @@
-import React, { lazy, Suspense, useMemo } from "react";
-
+import React, { lazy, Suspense, useState, useMemo } from "react";
 import { useList, useNavigation } from "@refinedev/core";
-
-import { DollarOutlined, RightCircleOutlined } from "@ant-design/icons";
+import { DollarOutlined, RightCircleOutlined, DownOutlined } from "@ant-design/icons";
 import { AreaConfig } from "@ant-design/plots";
-import { Button, Card } from "antd";
+import { Button, Card, Menu, Dropdown } from "antd";
 import dayjs from "dayjs";
 import { DealStage } from "interfaces/graphql";
-
 import { Text } from "@/components";
-
 const Area = lazy(() => import("@ant-design/plots/es/components/area"));
 
 export const DashboardDealsChart: React.FC<{}> = () => {
@@ -48,6 +44,9 @@ export const DashboardDealsChart: React.FC<{}> = () => {
                     state: "Won",
                 };
             });
+    
+
+      
 
         const lost = data?.data
             .find((node) => node.title === "LOST")
@@ -66,6 +65,7 @@ export const DashboardDealsChart: React.FC<{}> = () => {
             (a, b) => a.timeUnix - b.timeUnix,
         );
     }, [data]);
+
 
     const config: AreaConfig = {
         isStack: false,
